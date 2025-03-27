@@ -1,0 +1,47 @@
+{
+  "name": "online_store_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "testjas": "jasmine-ts",
+    "start": "node ./dev/server.ts",
+    "watch": "tsc-watch --esModuleInterop dev/server.ts --outDir ./build --onSuccess \"node ./dist/server.js\"",
+    "tsc": "tsc",
+    "dockerup": "docker-compose up ",
+    "dockerdown": "docker-compose down -v",
+    "test": "set ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "table": "set ENV=test && npx tsc dev/models/table_name.ts && node build/models/table_name.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/eslint": "^9.6.1",
+    "@types/jasmine": "^5.1.7",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/pg": "^8.11.11",
+    "bcrypt": "^5.1.1",
+    "eslint": "^9.22.0",
+    "jasmine": "^5.6.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.14.0"
+  }
+}
