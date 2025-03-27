@@ -42,6 +42,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE Order_Items (
     id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
     order_id INT NOT NULL REFERENCES Orders(id) ON DELETE CASCADE,
     product_id INT NOT NULL REFERENCES Products(id) ON DELETE CASCADE,
     quantity INT NOT NULL CHECK (quantity > 0)

@@ -3,9 +3,11 @@ import { Order } from "./store_types";
 import client from "../backend/database";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
+import OrderItemTableModel from "./order_items_model";
+const orderItemTB : {} = OrderItemTableModel;
 
 
-const OrderTableModel : {} = {
+const OrderTableModel = {
 
 
       // Create a new order
@@ -13,8 +15,9 @@ const OrderTableModel : {} = {
         try {
             // @ts-ignore
 const conn = await client.connect();
-            const sql = "INSERT INTO orders (name, price, category) VALUES ($1, $2) RETURNING *";
+            const sql = "INSERT INTO orders (name, price, category) VALUES ($1, $2, $3) RETURNING *";
             const result = await conn.query(sql, [order.user_id, order.status]);
+            await orderItemTB;
             conn.release();
             return result.rows[0];
         } catch (err) {
@@ -22,4 +25,6 @@ const conn = await client.connect();
         }
     },
 
-}
+};
+
+export default {OrderTableModel};

@@ -40,4 +40,12 @@ type Order = {
     status? : string,
 }
 
-export type {Product, User, Order};
+type Order_Items  = {
+    id : number,
+    user_id : number,
+    order_id : number ,
+    product_id : number,
+    quantity : number
+};
+
+export type {Product, User, Order, Order_Items};
