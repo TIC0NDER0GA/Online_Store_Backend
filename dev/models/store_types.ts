@@ -33,19 +33,12 @@ type User = {
 // status of order (active or complete)
 
 type Order = {
-    id : number,
-    products : Array<number>,
-    productQty : Array<number>,
+    id? : number,
     user_id : number,
+    product_id : number,
+    quantity : number
     status? : string,
 }
 
-type Order_Items  = {
-    id : number,
-    user_id : number,
-    order_id : number ,
-    product_id : number,
-    quantity : number
-};
 
-export type {Product, User, Order, Order_Items};
+export type {Product, User, Order};

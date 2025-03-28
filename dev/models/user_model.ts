@@ -14,7 +14,7 @@ const pepper : string | undefined = BCRPYT;
 const saltRounds : string| undefined = SALT_ROUNDS;
 
 
-const UserTableModel : {} = {
+const UserTableModel = {
 
     create : async (u: User) : Promise<User | undefined>  => {
         try {
@@ -78,4 +78,4 @@ const UserTableModel : {} = {
         }
 };
 
-export default {UserTableModel};
+export default UserTableModel;

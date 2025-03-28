@@ -3,7 +3,7 @@ import { Product } from "./store_types";
 import client from "../backend/database";
 
 
- const ProductTableModel : {} = {
+ const ProductTableModel = {
     // Create a new product
     create : async (product: Product) : Promise<Product> => {
         try {
@@ -46,31 +46,6 @@ const conn = await client.connect();
         }
     },
 
-    // Update a product by ID
-    update : async (id: number, product: Product): Promise<Product> => {
-        try {
-            // @ts-ignore
-const conn = await client.connect();
-            const sql = "UPDATE products SET name = $1, price = $2, category = $3 WHERE id = $6 RETURNING *";
-            const result = await conn.query(sql, [product.name, product.price, product.category, id]);
-            conn.release();
-            return result.rows[0];
-        } catch (err) {
-            throw new Error(`Could not update product ${id}. Error: ${err}`);
-        }
-    },
+ }
 
-    // Delete a product by ID
-    delete : async (id: number): Promise<Product> => {
-        try {
-            // @ts-ignore
-const conn = await client.connect();
-            const sql = "DELETE FROM products WHERE id = $1 RETURNING *";
-            const result = await conn.query(sql, [id]);
-            conn.release();
-            return result.rows[0];
-        } catch (err) {
-            throw new Error(`Could not delete product ${id}. Error: ${err}`);
-        }
-    }
-}
+export default ProductTableModel;
