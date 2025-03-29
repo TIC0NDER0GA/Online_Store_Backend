@@ -34,6 +34,8 @@ const UserTableModel = {
         }
     },
 
+    
+
     authenticate : async (username : string, password: string) : Promise<User | null> => {
         // @ts-ignore
         const conn = await client.connect();
