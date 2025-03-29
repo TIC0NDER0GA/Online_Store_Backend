@@ -36,6 +36,34 @@ const OrderTableModel = {
         }
         return null;
     },
+
+    addProducts : async (order: Order) : Promise<Order> => {
+        try {
+             // @ts-ignore
+            const conn = await client.connect();
+            const sql = "INSERT INTO order_products (order_id, user_id, product_id, quantity) VALUES($1, $2, $3, $4) RETURNING *";
+            const result = await conn.query(sql, [order.order_id, order.user_id, order.product_id, order.quantity]);
+            return result.rows[0];
+        } catch (err) {
+            throw new Error(`Could not add product to order ${order.order_id}: ${err}`)
+        }
+    },
+
+    showProductByUser : async (userId: number) : Promise<Array<Order>> => {
+        try {
+            // @ts-ignore
+           const conn = await client.connect();
+           const sql = "SELECT  op.id AS id, op.user_id, op.product_id, op.quantity, o.status, op.order_id" + 
+           " FROM Order_Products op INNER JOIN Orders o ON op.order_id = o.id WHERE op.user_id = $1";
+           const result = await conn.query(sql, [userId]);
+           return result.rows;
+       } catch (err) {
+           throw new Error(`Could not get order: ${err}`)
+       }
+    }
+
+
+
 };
 
 

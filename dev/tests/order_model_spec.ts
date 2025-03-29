@@ -41,4 +41,28 @@ describe("Order Model tests", () => {
         expect(order.length).toBeGreaterThan(0);
     });
 
+        /** ✅ TESTING addProducts METHOD */
+        it("should add a product to an order", async () => {
+            const addedProduct = await table.addProducts({
+                order_id: orderId as number,
+                user_id: 1,
+                product_id: 2,
+                quantity: 3,
+            });
+    
+            expect(addedProduct).toBeDefined();
+            expect(addedProduct.order_id).toBe(orderId);
+            expect(addedProduct.product_id).toBe(2);
+            expect(addedProduct.quantity).toBe(3);
+        });
+    
+        /** ✅ TESTING showProductByUser METHOD */
+        it("should retrieve products for a user", async () => {
+            const user_id = 1;
+            const products = await table.showProductByUser(user_id);
+    
+            expect(products.length).toBeGreaterThan(0);
+            expect(products[0].user_id).toBe(user_id);
+        });
+
 });

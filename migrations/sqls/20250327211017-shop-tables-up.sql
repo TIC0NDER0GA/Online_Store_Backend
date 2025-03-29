@@ -35,10 +35,17 @@ CREATE TABLE Users (
 -- status of order (active or complete)
 
 CREATE TABLE Orders (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
-    product_id INT NOT NULL REFERENCES Products(id) ON DELETE CASCADE,
-    quantity INT NOT NULL CHECK (quantity > 0)
-    status VARCHAR(50)
-);
+     id SERIAL PRIMARY KEY,
+     user_id INT NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
+     status VARCHAR(50)
+ );
 
+
+
+ CREATE TABLE Order_Products (
+     id SERIAL PRIMARY KEY,
+     order_id INT NOT NULL REFERENCES Orders(id) ON DELETE CASCADE,
+     user_id INT NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
+     product_id INT NOT NULL REFERENCES Products(id) ON DELETE CASCADE,
+     quantity INT NOT NULL CHECK (quantity > 0)
+ );

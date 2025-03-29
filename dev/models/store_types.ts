@@ -35,9 +35,10 @@ type User = {
 type Order = {
     id? : number,
     user_id : number,
-    product_id : number,
-    quantity : number
+    product_id? : number,
+    quantity? : number
     status? : string,
+    order_id?: number
 }
 
 

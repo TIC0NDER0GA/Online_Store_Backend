@@ -82,8 +82,8 @@ const show = async (req: Request, res : Response) => {
 const index = async (req: Request, res : Response) => {
     const {query, filters} : ProductQueryRequest = req.body;
     try {
-        const users : Array<Product> = await productsTable.index();
-        res.json(users);
+        const products : Array<Product> = await productsTable.index();
+        res.json(products);
 
     } catch (err) {
         res.status(400);
@@ -92,7 +92,7 @@ const index = async (req: Request, res : Response) => {
 }
 
 
-const userRoutes = (app: express.Application) => {
+const productRoutes = (app: express.Application) => {
     app.post('/products', create);
     app.get('/products', index);
     app.get('/products/:id', show);
@@ -101,4 +101,4 @@ const userRoutes = (app: express.Application) => {
 
 
 
-export default userRoutes;
+export default productRoutes;
