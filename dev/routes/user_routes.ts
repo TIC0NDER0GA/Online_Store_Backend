@@ -28,22 +28,15 @@ const create = async (req: Request, res: Response) => {
     const {query, filters, token} : UserQueryRequest = req.body;
 
     try {
-        const someUser: User = {
-            id: 1,
-            username : "User",
-            firstname : "First",
-            lastname : "Last",
-            password : "password"
-        }
 
         const inputUser: User = {
             username :  filters.username,
-            firstname : filters.lastname,
+            firstname : filters.firstname,
             lastname :  filters.lastname,
             password : filters.password
         }
 
-        const newUser: User | undefined = await usersTable.create(someUser);
+        const newUser: User | undefined = await usersTable.create(inputUser);
         // @ts-ignore
         const token = jwt.sign({user: newUser}, TOKEN_SECRET);        
         res.json(token);
@@ -83,7 +76,7 @@ const show = async (req: Request, res : Response) => {
 
 
 const index = async (req: Request, res : Response) => {
-    const {query, filters} : UserQueryRequest = req.body;
+    const {query, token, filters} : UserQueryRequest = req.body;
 
     try {
         // @ts-ignore
@@ -110,7 +103,6 @@ const userRoutes = (app: express.Application) => {
     app.get('/users', index);
     app.get('/users/:id', show);
 }
-
 
 
 

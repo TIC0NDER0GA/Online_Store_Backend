@@ -36,22 +36,6 @@ const UserTableModel = {
 
     
 
-    authenticate : async (username : string, password: string) : Promise<User | null> => {
-        // @ts-ignore
-        const conn = await client.connect();
-        const sql : string = 'SELECT password FROM users WHERE username=($1)';
-        // @ts-ignore
-        const result = await conn.query(sql, [username]);
-
-        if (result.rows.length) {
-            const user : User = result.rows[0];
-            if (bcrypt.compareSync(password + pepper, user.password)) {
-                return user;
-            }
-        }
-        return null;
-    },
-
         // Get a single user by ID
         show: async (id: number) : Promise<User> => {
             try {

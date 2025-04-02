@@ -41,10 +41,6 @@ const create = async (req: Request, res: Response) => {
     }
 
     try {
-        const someOrder: Order = {
-            user_id: 1,
-            status: "Active",
-        }
 
         const inputOrder: Order = {
             user_id: filters.user_id,
@@ -52,7 +48,7 @@ const create = async (req: Request, res: Response) => {
         }
 
 
-        const order: Order | undefined = await ordersTable.create(someOrder);
+        const order: Order | undefined = await ordersTable.create(inputOrder);
 
         res.json(order);
     } catch (err) {
@@ -86,14 +82,6 @@ const addProducts = async (req: Request, res: Response) => {
     const {query, filters} : OrderQueryRequest = req.body;
 
     try {
-        const someOrder: Order = {
-            user_id: 1,
-            status: "Active",
-            quantity : 4,
-            order_id: 1,
-            product_id: 1
-            
-        }
 
         const inputOrder: Order = {
             user_id: filters.user_id,
@@ -104,7 +92,7 @@ const addProducts = async (req: Request, res: Response) => {
         }
 
          // @ts-ignore
-        const order : Array<Order> = await ordersTable.addProducts(someOrder);
+        const order : Array<Order> = await ordersTable.addProducts(inputOrder);
         res.json(order);
 
     } catch (err) {
@@ -121,7 +109,6 @@ const orderRoutes = (app: express.Application) => {
     app.get('/orders/:id', show);
     app.post('/orders/:id/products', addProducts);
 }
-
 
 
 

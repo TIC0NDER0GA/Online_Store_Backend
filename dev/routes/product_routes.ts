@@ -37,12 +37,7 @@ const create = async (req: Request, res: Response) => {
     }
 
     try {
-        const someProduct: Product = {
-            id: 1,
-            name: "Orange",
-            price: 3.99,
-            category: "Fruit"
-        }
+
 
         const inputProduct: Product = {
             name: filters.name,
@@ -51,7 +46,7 @@ const create = async (req: Request, res: Response) => {
         }
 
 
-        const product: Product | undefined = await productsTable.create(someProduct);
+        const product: Product | undefined = await productsTable.create(inputProduct);
 
         res.json(product);
     } catch (err) {
@@ -97,7 +92,6 @@ const productRoutes = (app: express.Application) => {
     app.get('/products', index);
     app.get('/products/:id', show);
 }
-
 
 
 
