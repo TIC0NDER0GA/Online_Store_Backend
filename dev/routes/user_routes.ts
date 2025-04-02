@@ -16,8 +16,8 @@ type UserQueryRequest = {
     filters  : {
         id: number,
         username: string,
-        firstName: string,
-        lastName: string,
+        firstname: string,
+        lastname: string,
         password: string
     };
 }
@@ -31,15 +31,15 @@ const create = async (req: Request, res: Response) => {
         const someUser: User = {
             id: 1,
             username : "User",
-            firstName : "First",
-            lastName : "Last",
+            firstname : "First",
+            lastname : "Last",
             password : "password"
         }
 
         const inputUser: User = {
             username :  filters.username,
-            firstName : filters.lastName,
-            lastName :  filters.lastName,
+            firstname : filters.lastname,
+            lastname :  filters.lastname,
             password : filters.password
         }
 

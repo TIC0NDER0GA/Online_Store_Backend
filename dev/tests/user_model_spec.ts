@@ -11,15 +11,15 @@ describe(" User Model tests", () => {
     const user1 : User = {
         id : undefined,
         username : "userDude",
-        firstName : "John",
-        lastName : "Smith",
+        firstname : "John",
+        lastname : "Smith",
         password : "password"
     }
 
     beforeAll(async () => {
         // @ts-ignore
         const conn = await client.connect();
-        await conn.query("DELETE FROM users1"); // Clean up the table before running tests
+        await conn.query("DELETE FROM users"); // Clean up the table before running tests
         conn.release();
     });
 
@@ -27,16 +27,16 @@ describe(" User Model tests", () => {
         const createdUser = await table.create(user1);
         expect(createdUser).toBeDefined();
         // @ts-ignore
-        expect(createdUser.firstName).toBe(user1.firstName);
+        expect(createdUser.firstname).toBe(user1.firstname);
         // @ts-ignore
-        expect(createdUser.lastName).toBe(user1.lastName);
+        expect(createdUser.lastname).toBe(user1.lastname);
         // @ts-ignore
         userId = createdUser.id;
     });
 
-    it("should return a list of books", async () => {
-        const books = await table.index();
-        expect(books.length).toBeGreaterThan(0);
+    it("should return a list of users", async () => {
+        const users = await table.index();
+        expect(users.length).toBeGreaterThan(0);
     });
 
     it("should return a single user by ID", async () => {

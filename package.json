@@ -2,6 +2,7 @@
   "name": "online_store_backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type" :"commonjs",
   "scripts": {
     "testjas": "jasmine-ts",
     "start": "node ./dev/server.ts",
@@ -9,7 +10,9 @@
     "tsc": "tsc",
     "dockerup": "docker-compose up ",
     "dockerdown": "docker-compose down -v",
-    "test": "set ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "test1": "set ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "test2": "set ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate reset --env test",
+    "dockercycle" : "docker-compose down -v && docker-compose up",
     "table": "set ENV=test && npx tsc dev/models/table_name.ts && node build/models/table_name.js"
   },
   "keywords": [],

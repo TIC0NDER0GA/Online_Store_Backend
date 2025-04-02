@@ -14,8 +14,8 @@ const OrderTableModel = {
         try {
             // @ts-ignore
             const conn = await client.connect();
-            const sql = "INSERT INTO orders (user_id, product_id, quantity, status) VALUES ($1, $2, $3, $4) RETURNING *";
-            const result = await conn.query(sql, [order.user_id, order.product_id, order.quantity, order.status]);
+            const sql = "INSERT INTO orders (user_id, status) VALUES ($1, $2) RETURNING *";
+            const result = await conn.query(sql, [order.user_id, order.status]);
             conn.release();
             return result.rows[0];
         } catch (err) {

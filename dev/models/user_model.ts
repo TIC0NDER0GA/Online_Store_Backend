@@ -16,7 +16,7 @@ const saltRounds : string| undefined = SALT_ROUNDS;
 
 const UserTableModel = {
 
-    create : async (u: User) : Promise<User | undefined>  => {
+    create : async (u: User) : Promise<User>  => {
         try {
              // @ts-ignore
             const conn = await client.connect();
@@ -26,11 +26,11 @@ const UserTableModel = {
             );
             const sql : string = 'INSERT INTO users (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING *';
             // @ts-ignore
-            const result = conn.query(sql, [ u.firstname ,u.lastname ,u.username ,hash ]);
+            const result = await conn.query(sql, [ u.firstname ,u.lastname ,u.username ,hash ]);
             conn.release();
             return result.rows[0];
         } catch (err) {
-            console.log(err);
+            throw new Error(`Error could not create new user: ${err}`);
         }
     },
 
@@ -44,8 +44,8 @@ const UserTableModel = {
         const result = await conn.query(sql, [username]);
 
         if (result.rows.length) {
-            const user = result.rows[0];
-            if (bcrypt.compareSync(password + pepper, user.pass)) {
+            const user : User = result.rows[0];
+            if (bcrypt.compareSync(password + pepper, user.password)) {
                 return user;
             }
         }

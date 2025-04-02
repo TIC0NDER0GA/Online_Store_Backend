@@ -23,7 +23,7 @@ CREATE TABLE Users (
     firstName VARCHAR(150),
     lastName VARCHAR(150),
     username VARCHAR(255),
-    password VARCHAR(255),
+    password VARCHAR(255)
 );
 
 
